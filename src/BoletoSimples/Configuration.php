@@ -8,6 +8,7 @@ class Configuration {
   public $application_id = null;
   public $application_secret = null;
   public $access_token = null;
+  private $user_agent = null;
 
   public function __construct($params = array()) {
     $default_environment = getenv('BOLETOSIMPLES_ENV') ? getenv('BOLETOSIMPLES_ENV') : 'sandbox';
@@ -19,9 +20,13 @@ class Configuration {
     $this->application_id = isset($params['application_id']) ? $params['application_id'] : $default_application_id;
     $this->application_secret = isset($params['application_secret']) ? $params['application_secret'] : $default_application_secret;
     $this->access_token = isset($params['access_token']) ? $params['access_token'] : $default_access_token;
+    $this->user_agent = isset($params['user_agent']) ? $params['user_agent'] : null;
   }
 
   public function userAgent() {
+    if(!empty($this->user_agent))
+        return $this->user_agent;
+
     return "BoletoSimples PHP Client v".\BoletoSimples::VERSION." (contato@boletosimples.com.br)";
   }
 

@@ -1,7 +1,7 @@
 <?php
 
 class BoletoSimples {
-  const VERSION = "0.0.9";
+  const VERSION = "0.1.0a";
   public static $configuration = null;
   public static $last_request = null;
 

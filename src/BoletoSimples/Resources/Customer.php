@@ -8,13 +8,13 @@ class Customer extends BaseResource {
       throw new \Exception("Couldn't find ".get_called_class()." without an cnpj or cpf.");
     }
     $response = self::sendRequest('GET', 'customers/cnpj_cpf', ['query' => ['q' => $cnpj_cpf]]);
-    return new Customer($response->json());
+    return new Customer(json_decode($response->getBody(),true));
   }
   public static function email($email) {
     if (!$email) {
       throw new \Exception("Couldn't find ".get_called_class()." without an email.");
     }
     $response = self::sendRequest('GET', 'customers/email', ['query' => ['q' => $email]]);
-    return new Customer($response->json());
+    return new Customer(json_decode($response->getBody(),true));
   }
 }

@@ -3,7 +3,9 @@
 namespace BoletoSimples;
 
 use GuzzleHttp\Client;
-use CommerceGuys\Guzzle\Oauth2\Oauth2Subscriber;
+use kamermans\OAuth2\GrantType\NullGrantType;
+use kamermans\OAuth2\OAuth2Middleware;
+use GuzzleHttp\HandlerStack;
 
 class BaseResource {
   /**
@@ -79,13 +81,13 @@ class BaseResource {
   public function parseResponse($response) {
     $status = $response->getStatusCode();
     if ($status >= 200 && $status <= 299) {
-      if($response->json()) {
-        $this->_attributes = $response->json();
+      if(json_decode($response->getBody(),true)) {
+        $this->_attributes = json_decode($response->getBody(),true);
       }
       return true;
     } else {
-      if (isset($response->json()['errors'])) {
-        $this->response_errors = $response->json()['errors'];
+      if (isset(json_decode($response->getBody(),true)['errors'])) {
+        $this->response_errors = json_decode($response->getBody(),true)['errors'];
       }
       return false;
     }
@@ -137,7 +139,7 @@ class BaseResource {
     $class = get_called_class();
     $response = self::sendRequest('GET', $class::element_name_plural(), ['query' => $params]);
     $collection = [];
-    foreach ($response->json() as $attributes) {
+    foreach (json_decode($response->getBody(),true) as $attributes) {
       $collection[] = new $class($attributes);
     }
     return $collection;
@@ -145,9 +147,7 @@ class BaseResource {
 
   private static function _sendRequest($method, $path, $options = []) {
     $options = array_merge(self::$default_options, $options);
-    $request = self::$client->createRequest($method, $path, $options);
-    $response = self::$client->send($request);
-    \BoletoSimples::$last_request = new LastRequest($request, $response);
+    $response = self::$client->request($method,$path,$options);
     if ($response->getStatusCode() >= 400 && $response->getStatusCode() <= 599) {
       new ResponseError($response);
     }
@@ -173,19 +173,23 @@ class BaseResource {
   public static function configure() {
     $config = \BoletoSimples::$configuration;
 
-    $oauth2 = new Oauth2Subscriber();
-    $oauth2->setAccessToken($config->access_token);
+    $oauth2 = new OAuth2Middleware(new NullGrantType);
+    $oauth2->setAccessToken([
+      'access_token' => $config->access_token,
+    ]);
+
+    $stack = HandlerStack::create();
+    $stack->push($oauth2);
 
     self::$client = new Client([
-      'base_url' => $config->baseUri(),
-      'defaults' => [
-        'headers' => [
-          'User-Agent' => $config->userAgent()
-        ],
-        'auth' => 'oauth2',
-        'subscribers' => [$oauth2]
+      'handler' => $stack,
+      'base_uri' => $config->baseUri(),
+      'auth'    => 'oauth',
+
+      'headers' => [
+          'User-Agent' => $config->userAgent(),
       ],
-      'verify' => false
+      'verify' => false,
     ]);
 
     self::$default_options = ['headers' => ['Content-Type'=> 'application/json'], 'exceptions' => false];

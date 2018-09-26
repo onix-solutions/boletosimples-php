@@ -1,18 +1,18 @@
 # Boleto Simples PHP
 
-[![Lates Stable Version](https://img.shields.io/packagist/v/boletosimples/boletosimples.svg)][packagist]
-[![Build Status](http://img.shields.io/travis/BoletoSimples/boletosimples-php.svg)][travis]
-[![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/BoletoSimples/boletosimples-php.svg)][scrutinizer]
-[![Scrutinizer Code Coverage](https://img.shields.io/scrutinizer/coverage/g/BoletoSimples/boletosimples-php.svg)][scrutinizer_coverage]
+[![Lates Stable Version](https://img.shields.io/packagist/v/onix-solutions/boletosimples.svg)][packagist]
+[![Build Status](http://img.shields.io/travis/Onix-solutions/boletosimples-php.svg)][travis]
+[![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/Onix-solutions/boletosimples-php.svg)][scrutinizer]
+[![Scrutinizer Code Coverage](https://img.shields.io/scrutinizer/coverage/g/Onix-solutions/boletosimples-php.svg)][scrutinizer_coverage]
 [![Dependency Status](https://www.versioneye.com/user/projects/54f3d5904f31083e1b000838/badge.svg?style=flat)][versioneye]
-[![License](https://img.shields.io/packagist/l/boletosimples/boletosimples.svg)][packagist_license]
+[![License](https://img.shields.io/packagist/l/onix-solutions/boletosimples.svg)][packagist_license]
 
-[packagist]: https://packagist.org/packages/boletosimples/boletosimples
-[travis]: http://travis-ci.org/BoletoSimples/boletosimples-php
-[scrutinizer]: https://scrutinizer-ci.com/g/BoletoSimples/boletosimples-php/
-[scrutinizer_coverage]: https://scrutinizer-ci.com/g/BoletoSimples/boletosimples-php/
+[packagist]: https://packagist.org/packages/onix-solutions/boletosimples
+[travis]: http://travis-ci.org/Onix-solutions/boletosimples-php
+[scrutinizer]: https://scrutinizer-ci.com/g/Onix-solutions/boletosimples-php/
+[scrutinizer_coverage]: https://scrutinizer-ci.com/g/Onix-solutions/boletosimples-php/
 [versioneye]: https://www.versioneye.com/user/projects/54f3d5904f31083e1b000838
-[packagist_license]: https://github.com/BoletoSimples/boletosimples-php/blob/master/LICENSE
+[packagist_license]: https://github.com/Onix-solutions/boletosimples-php/blob/master/LICENSE
 
 Biblioteca PHP para acessar informações do [Boleto Simples](http://boletosimples.com.br) através da [API](http://api.boletosimples.com.br).
 
@@ -31,7 +31,7 @@ Crie um arquivo chamado `composer.json` com o seguinte conteúdo:
   "minimum-stability": "dev",
   "prefer-stable" : true,
   "require": {
-    "boletosimples/boletosimples": "dev-master"
+    "onix-solutions/boletosimples": "dev-master"
   }
 }
 ```
@@ -256,7 +256,7 @@ Esse código é livre para ser usado dentro dos termos da licença [MIT license]
 
 ## Bugs, Issues, Agradecimentos, etc
 
-Comentários são bem-vindos. Envie seu feedback através do [issue tracker do GitHub](http://github.com/BoletoSimples/boletosimples-php/issues)
+Comentários são bem-vindos. Envie seu feedback através do [issue tracker do GitHub](http://github.com/Onix-solutions/boletosimples-php/issues)
 
 ## Autor
 
